@@ -1,0 +1,45 @@
+--بخش لاگین با استفاده از کلیک راست زده شده
+
+--به نظرم employee مناسب تر است زیرا هر سطر این جدول 
+--اطلاعات مربوط به یک کارمند را در اختیار ما می گذارد
+--و در کل استاندارد دیتابیس است
+CREATE TABLE employee (
+  id INT PRIMARY KEY,
+   latinname VARCHAR(100),
+   firstname NVARCHAR(100),
+   lastname NVARCHAR(100),
+  status VARCHAR(50)
+)
+
+ALTER TABLE employee
+ADD is_remote int check (is_remote<10 and is_remote>=0);
+
+ ALTER TABLE employee
+ ADD "Date of hire" DATE;
+
+ ALTER TABLE employee
+ ADD "foreign" bit;
+
+ CREATE TABLE team (
+  team_id INT PRIMARY KEY,
+  team_name VARCHAR(255) NOT NULL
+);
+
+ALTER TABLE employee
+ADD team_id INT;
+
+ALTER TABLE employee
+ADD FOREIGN KEY (team_id) REFERENCES team(team_id);
+
+UPDATE employee
+SET status = 2
+WHERE (is_remote = 1);
+
+--به طور کلی لوپ استاندارد sql  نیست
+--اما update استاندارد هست
+-- کلا آپدیت بر اساس set یا where  کار می کند و ساده تر است
+--اما خوب با لوپ ما آزادی بیشتری داریم برای شرط گذاری
+
+
+ ALTER TABLE employee
+ ADD CONSTRAINT Name UNIQUE (firstname,lastName); 
